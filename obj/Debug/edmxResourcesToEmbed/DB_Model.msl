@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NEWTESTModelStoreContainer" CdmEntityContainer="NEWTESTEntities">
+    <EntitySetMapping Name="TBL_INVOICES">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_INVOICES)">
+        <MappingFragment StoreEntitySet="TBL_INVOICES">
+          <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+          <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+          <ScalarProperty Name="I_STATUT" ColumnName="I_STATUT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ORDERS">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_ORDERS)">
+        <MappingFragment StoreEntitySet="TBL_ORDERS">
+          <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+          <ScalarProperty Name="O_QTE" ColumnName="O_QTE" />
+          <ScalarProperty Name="O_DATE" ColumnName="O_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PRODUCTS">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_PRODUCTS)">
+        <MappingFragment StoreEntitySet="TBL_PRODUCTS">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="P_NAME" ColumnName="P_NAME" />
+          <ScalarProperty Name="P_DISCRIPTION" ColumnName="P_DISCRIPTION" />
+          <ScalarProperty Name="P_IMG" ColumnName="P_IMG" />
+          <ScalarProperty Name="P_PRICE" ColumnName="P_PRICE" />
+          <ScalarProperty Name="P_STATUT" ColumnName="P_STATUT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_USERS">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_USERS)">
+        <MappingFragment StoreEntitySet="TBL_USERS">
+          <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+          <ScalarProperty Name="U_EMAIL" ColumnName="U_EMAIL" />
+          <ScalarProperty Name="U_PASSWORD" ColumnName="U_PASSWORD" />
+          <ScalarProperty Name="U_PHONE" ColumnName="U_PHONE" />
+          <ScalarProperty Name="U_ADRESS" ColumnName="U_ADRESS" />
+          <ScalarProperty Name="U_TYPE" ColumnName="U_TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

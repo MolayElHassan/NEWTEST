@@ -1,0 +1,66 @@
+﻿@model IEnumerable<NEWTEST.TBL_PRODUCTS>
+
+@{
+    ViewBag.Title = "ListPrd";
+    Layout = "~/Views/Shared/_DashLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+<fieldset>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @if (@ViewBag.Message != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Message
+        </div>
+    }
+
+    <div class="container mt-5">
+        <div class="row tm-content-row">
+            <div class="col-12 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-products">
+                    <div class="tm-product-table-container">
+                        <table class="table table-hover tm-table-small tm-product-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">PIC</th>
+                                    <th scope="col">NAME</th>
+                                    <th scope="col">DISCRIPTION</th>
+                                    <th scope="col">PRICE</th>
+                                    <th scope="col">CRUD    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><a href="Uploads/@Html.DisplayFor(modelItem => item.P_IMG)"><img src="Uploads/@Html.DisplayFor(modelItem => item.P_IMG)" width="50" /></a></td>
+                                        <td class="tm-product-name">@Html.DisplayFor(modelItem => item.P_NAME)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.P_DISCRIPTION)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.P_PRICE)</td>
+                                        <td class="text-right">
+                                            <a href="@Url.Action("DeletePrd/"+item.P_ID)" class="tm-product-delete-link">
+                                                <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                            </a>
+                                            <a href="@Url.Action("EditPrd/"+item.P_ID)" class="tm-product-delete-link">
+                                                <i class="fas fa-pencil-alt tm-product-delete-icon"></i>
+                                            </a>
+                                            <a href="@Url.Action("DetailPrd/"+item.P_ID)" class="tm-product-delete-link">
+                                                <i class="fas fa-info tm-product-delete-icon"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</fieldset>
+}

@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NEWTESTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="NEWTESTModelStoreContainer">
+    <EntitySet Name="TBL_INVOICES" EntityType="NEWTESTModel.Store.TBL_INVOICES" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TBL_ORDERS" EntityType="NEWTESTModel.Store.TBL_ORDERS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TBL_PRODUCTS" EntityType="NEWTESTModel.Store.TBL_PRODUCTS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TBL_USERS" EntityType="NEWTESTModel.Store.TBL_USERS" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__TBL_INVOIC__U_ID__3D5E1FD2" Association="NEWTESTModel.Store.FK__TBL_INVOIC__U_ID__3D5E1FD2">
+      <End Role="TBL_USERS" EntitySet="TBL_USERS" />
+      <End Role="TBL_INVOICES" EntitySet="TBL_INVOICES" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TBL_ORDERS__I_ID__4222D4EF" Association="NEWTESTModel.Store.FK__TBL_ORDERS__I_ID__4222D4EF">
+      <End Role="TBL_INVOICES" EntitySet="TBL_INVOICES" />
+      <End Role="TBL_ORDERS" EntitySet="TBL_ORDERS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TBL_ORDERS__P_ID__412EB0B6" Association="NEWTESTModel.Store.FK__TBL_ORDERS__P_ID__412EB0B6">
+      <End Role="TBL_PRODUCTS" EntitySet="TBL_PRODUCTS" />
+      <End Role="TBL_ORDERS" EntitySet="TBL_ORDERS" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TBL_INVOICES">
+    <Key>
+      <PropertyRef Name="I_ID" />
+    </Key>
+    <Property Name="I_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="U_ID" Type="int" Nullable="false" />
+    <Property Name="I_STATUT" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ORDERS">
+    <Key>
+      <PropertyRef Name="O_ID" />
+    </Key>
+    <Property Name="O_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="P_ID" Type="int" Nullable="false" />
+    <Property Name="I_ID" Type="int" Nullable="false" />
+    <Property Name="O_QTE" Type="int" Nullable="false" />
+    <Property Name="O_DATE" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TBL_PRODUCTS">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="P_NAME" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="P_DISCRIPTION" Type="varchar(max)" Nullable="false" />
+    <Property Name="P_IMG" Type="varchar" Nullable="true" MaxLength="255" />
+    <Property Name="P_PRICE" Type="real" Nullable="false" />
+    <Property Name="P_STATUT" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TBL_USERS">
+    <Key>
+      <PropertyRef Name="U_ID" />
+    </Key>
+    <Property Name="U_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="U_EMAIL" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="U_PASSWORD" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="U_PHONE" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="U_ADRESS" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="U_TYPE" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="FK__TBL_INVOIC__U_ID__3D5E1FD2">
+    <End Role="TBL_USERS" Type="NEWTESTModel.Store.TBL_USERS" Multiplicity="1" />
+    <End Role="TBL_INVOICES" Type="NEWTESTModel.Store.TBL_INVOICES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_USERS">
+        <PropertyRef Name="U_ID" />
+      </Principal>
+      <Dependent Role="TBL_INVOICES">
+        <PropertyRef Name="U_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TBL_ORDERS__I_ID__4222D4EF">
+    <End Role="TBL_INVOICES" Type="NEWTESTModel.Store.TBL_INVOICES" Multiplicity="1" />
+    <End Role="TBL_ORDERS" Type="NEWTESTModel.Store.TBL_ORDERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INVOICES">
+        <PropertyRef Name="I_ID" />
+      </Principal>
+      <Dependent Role="TBL_ORDERS">
+        <PropertyRef Name="I_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TBL_ORDERS__P_ID__412EB0B6">
+    <End Role="TBL_PRODUCTS" Type="NEWTESTModel.Store.TBL_PRODUCTS" Multiplicity="1" />
+    <End Role="TBL_ORDERS" Type="NEWTESTModel.Store.TBL_ORDERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PRODUCTS">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="TBL_ORDERS">
+        <PropertyRef Name="P_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NEWTESTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TBL_INVOICES">
+          <Key>
+            <PropertyRef Name="I_ID" />
+          </Key>
+          <Property Name="I_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_ID" Type="Int32" Nullable="false" />
+          <Property Name="I_STATUT" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TBL_USERS" Relationship="Self.FK__TBL_INVOIC__U_ID__3D5E1FD2" FromRole="TBL_INVOICES" ToRole="TBL_USERS" />
+          <NavigationProperty Name="TBL_ORDERS" Relationship="Self.FK__TBL_ORDERS__I_ID__4222D4EF" FromRole="TBL_INVOICES" ToRole="TBL_ORDERS" />
+        </EntityType>
+        <EntityType Name="TBL_ORDERS">
+          <Key>
+            <PropertyRef Name="O_ID" />
+          </Key>
+          <Property Name="O_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_ID" Type="Int32" Nullable="false" />
+          <Property Name="I_ID" Type="Int32" Nullable="false" />
+          <Property Name="O_QTE" Type="Int32" Nullable="false" />
+          <Property Name="O_DATE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TBL_INVOICES" Relationship="Self.FK__TBL_ORDERS__I_ID__4222D4EF" FromRole="TBL_ORDERS" ToRole="TBL_INVOICES" />
+          <NavigationProperty Name="TBL_PRODUCTS" Relationship="Self.FK__TBL_ORDERS__P_ID__412EB0B6" FromRole="TBL_ORDERS" ToRole="TBL_PRODUCTS" />
+        </EntityType>
+        <EntityType Name="TBL_PRODUCTS">
+          <Key>
+            <PropertyRef Name="P_ID" />
+          </Key>
+          <Property Name="P_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_DISCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_IMG" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="P_PRICE" Type="Single" Nullable="false" />
+          <Property Name="P_STATUT" Type="Int32" />
+          <NavigationProperty Name="TBL_ORDERS" Relationship="Self.FK__TBL_ORDERS__P_ID__412EB0B6" FromRole="TBL_PRODUCTS" ToRole="TBL_ORDERS" />
+        </EntityType>
+        <EntityType Name="TBL_USERS">
+          <Key>
+            <PropertyRef Name="U_ID" />
+          </Key>
+          <Property Name="U_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="U_EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="U_PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="U_PHONE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="U_ADRESS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="U_TYPE" Type="Int32" />
+          <NavigationProperty Name="TBL_INVOICES" Relationship="Self.FK__TBL_INVOIC__U_ID__3D5E1FD2" FromRole="TBL_USERS" ToRole="TBL_INVOICES" />
+        </EntityType>
+        <Association Name="FK__TBL_INVOIC__U_ID__3D5E1FD2">
+          <End Role="TBL_USERS" Type="Self.TBL_USERS" Multiplicity="1" />
+          <End Role="TBL_INVOICES" Type="Self.TBL_INVOICES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_USERS">
+              <PropertyRef Name="U_ID" />
+            </Principal>
+            <Dependent Role="TBL_INVOICES">
+              <PropertyRef Name="U_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_ORDERS__I_ID__4222D4EF">
+          <End Role="TBL_INVOICES" Type="Self.TBL_INVOICES" Multiplicity="1" />
+          <End Role="TBL_ORDERS" Type="Self.TBL_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_INVOICES">
+              <PropertyRef Name="I_ID" />
+            </Principal>
+            <Dependent Role="TBL_ORDERS">
+              <PropertyRef Name="I_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TBL_ORDERS__P_ID__412EB0B6">
+          <End Role="TBL_PRODUCTS" Type="Self.TBL_PRODUCTS" Multiplicity="1" />
+          <End Role="TBL_ORDERS" Type="Self.TBL_ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBL_PRODUCTS">
+              <PropertyRef Name="P_ID" />
+            </Principal>
+            <Dependent Role="TBL_ORDERS">
+              <PropertyRef Name="P_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NEWTESTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TBL_INVOICES" EntityType="Self.TBL_INVOICES" />
+          <EntitySet Name="TBL_ORDERS" EntityType="Self.TBL_ORDERS" />
+          <EntitySet Name="TBL_PRODUCTS" EntityType="Self.TBL_PRODUCTS" />
+          <EntitySet Name="TBL_USERS" EntityType="Self.TBL_USERS" />
+          <AssociationSet Name="FK__TBL_INVOIC__U_ID__3D5E1FD2" Association="Self.FK__TBL_INVOIC__U_ID__3D5E1FD2">
+            <End Role="TBL_USERS" EntitySet="TBL_USERS" />
+            <End Role="TBL_INVOICES" EntitySet="TBL_INVOICES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_ORDERS__I_ID__4222D4EF" Association="Self.FK__TBL_ORDERS__I_ID__4222D4EF">
+            <End Role="TBL_INVOICES" EntitySet="TBL_INVOICES" />
+            <End Role="TBL_ORDERS" EntitySet="TBL_ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TBL_ORDERS__P_ID__412EB0B6" Association="Self.FK__TBL_ORDERS__P_ID__412EB0B6">
+            <End Role="TBL_PRODUCTS" EntitySet="TBL_PRODUCTS" />
+            <End Role="TBL_ORDERS" EntitySet="TBL_ORDERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NEWTESTModelStoreContainer" CdmEntityContainer="NEWTESTEntities">
+    <EntitySetMapping Name="TBL_INVOICES">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_INVOICES)">
+        <MappingFragment StoreEntitySet="TBL_INVOICES">
+          <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+          <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+          <ScalarProperty Name="I_STATUT" ColumnName="I_STATUT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_ORDERS">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_ORDERS)">
+        <MappingFragment StoreEntitySet="TBL_ORDERS">
+          <ScalarProperty Name="O_ID" ColumnName="O_ID" />
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="I_ID" ColumnName="I_ID" />
+          <ScalarProperty Name="O_QTE" ColumnName="O_QTE" />
+          <ScalarProperty Name="O_DATE" ColumnName="O_DATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_PRODUCTS">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_PRODUCTS)">
+        <MappingFragment StoreEntitySet="TBL_PRODUCTS">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="P_NAME" ColumnName="P_NAME" />
+          <ScalarProperty Name="P_DISCRIPTION" ColumnName="P_DISCRIPTION" />
+          <ScalarProperty Name="P_IMG" ColumnName="P_IMG" />
+          <ScalarProperty Name="P_PRICE" ColumnName="P_PRICE" />
+          <ScalarProperty Name="P_STATUT" ColumnName="P_STATUT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TBL_USERS">
+      <EntityTypeMapping TypeName="IsTypeOf(NEWTESTModel.TBL_USERS)">
+        <MappingFragment StoreEntitySet="TBL_USERS">
+          <ScalarProperty Name="U_ID" ColumnName="U_ID" />
+          <ScalarProperty Name="U_EMAIL" ColumnName="U_EMAIL" />
+          <ScalarProperty Name="U_PASSWORD" ColumnName="U_PASSWORD" />
+          <ScalarProperty Name="U_PHONE" ColumnName="U_PHONE" />
+          <ScalarProperty Name="U_ADRESS" ColumnName="U_ADRESS" />
+          <ScalarProperty Name="U_TYPE" ColumnName="U_TYPE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

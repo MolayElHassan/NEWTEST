@@ -1,0 +1,122 @@
+﻿@model NEWTEST.TBL_PRODUCTS
+
+@{
+    ViewBag.Title = "DetailPrd";
+    Layout = "~/Views/Shared/_DashLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+<fieldset>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @if (@ViewBag.Message != null)
+    {
+        <div style="border: 1px solid red">
+            @ViewBag.Message
+        </div>
+    }
+
+    <div class="container tm-mt-big tm-mb-big">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+                <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                    <div class="row tm-edit-product-row">
+                        <div class="col-xl-6 col-lg-6 col-md-12">
+                            <form action="" class="tm-edit-product-form">
+                                <div class="form-group mb-3">
+                                    <label for="name">Product Name</label>
+                                    <input type="text" class="form-control validate" value="@Html.DisplayNameFor(model => model.P_NAME)"  />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control validate" rows="3">
+                                        @Html.DisplayNameFor(model => model.P_DISCRIPTION)
+                                    </textarea>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="price">Product Price</label>
+                                    <input type="text" class="form-control validate" value="@Html.DisplayNameFor(model => model.P_PRICE)" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="price">Product Statut</label>
+                                    <select class="custom-select tm-select-accounts">
+                                        <option value="1">In Stock</option>
+                                        <option value="2">Out of Stock</option>
+                                    </select>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                            <div class="tm-product-img-dummy mx-auto">
+                                <i class="fas fa-cloud-upload-alt tm-upload-icon" onclick="document.getElementById('fileInput').click();"></i>
+                            </div>
+                            <div class="custom-file mt-3 mb-3">
+                                <input id="fileInput" type="file" style="display:none;">
+                                @Html.TextBoxFor(model => model.P_STATUT, new { type = "file", accept = "image/*", @class = "btn btn-primary btn-block mx-auto" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</fieldset>
+}
+
+<h2>DetailPrd</h2>
+
+<div>
+    <h4>TBL_PRODUCTS</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.P_NAME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P_NAME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.P_DISCRIPTION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P_DISCRIPTION)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.P_IMG)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P_IMG)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.P_PRICE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P_PRICE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.P_STATUT)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.P_STATUT)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.P_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

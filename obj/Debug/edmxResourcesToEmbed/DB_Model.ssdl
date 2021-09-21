@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NEWTESTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="NEWTESTModelStoreContainer">
+    <EntitySet Name="TBL_INVOICES" EntityType="NEWTESTModel.Store.TBL_INVOICES" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TBL_ORDERS" EntityType="NEWTESTModel.Store.TBL_ORDERS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TBL_PRODUCTS" EntityType="NEWTESTModel.Store.TBL_PRODUCTS" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TBL_USERS" EntityType="NEWTESTModel.Store.TBL_USERS" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__TBL_INVOIC__U_ID__3D5E1FD2" Association="NEWTESTModel.Store.FK__TBL_INVOIC__U_ID__3D5E1FD2">
+      <End Role="TBL_USERS" EntitySet="TBL_USERS" />
+      <End Role="TBL_INVOICES" EntitySet="TBL_INVOICES" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TBL_ORDERS__I_ID__4222D4EF" Association="NEWTESTModel.Store.FK__TBL_ORDERS__I_ID__4222D4EF">
+      <End Role="TBL_INVOICES" EntitySet="TBL_INVOICES" />
+      <End Role="TBL_ORDERS" EntitySet="TBL_ORDERS" />
+    </AssociationSet>
+    <AssociationSet Name="FK__TBL_ORDERS__P_ID__412EB0B6" Association="NEWTESTModel.Store.FK__TBL_ORDERS__P_ID__412EB0B6">
+      <End Role="TBL_PRODUCTS" EntitySet="TBL_PRODUCTS" />
+      <End Role="TBL_ORDERS" EntitySet="TBL_ORDERS" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TBL_INVOICES">
+    <Key>
+      <PropertyRef Name="I_ID" />
+    </Key>
+    <Property Name="I_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="U_ID" Type="int" Nullable="false" />
+    <Property Name="I_STATUT" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TBL_ORDERS">
+    <Key>
+      <PropertyRef Name="O_ID" />
+    </Key>
+    <Property Name="O_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="P_ID" Type="int" Nullable="false" />
+    <Property Name="I_ID" Type="int" Nullable="false" />
+    <Property Name="O_QTE" Type="int" Nullable="false" />
+    <Property Name="O_DATE" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TBL_PRODUCTS">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="P_NAME" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="P_DISCRIPTION" Type="varchar(max)" Nullable="false" />
+    <Property Name="P_IMG" Type="varchar" Nullable="true" MaxLength="255" />
+    <Property Name="P_PRICE" Type="real" Nullable="false" />
+    <Property Name="P_STATUT" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="TBL_USERS">
+    <Key>
+      <PropertyRef Name="U_ID" />
+    </Key>
+    <Property Name="U_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="U_EMAIL" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="U_PASSWORD" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="U_PHONE" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="U_ADRESS" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="U_TYPE" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="FK__TBL_INVOIC__U_ID__3D5E1FD2">
+    <End Role="TBL_USERS" Type="NEWTESTModel.Store.TBL_USERS" Multiplicity="1" />
+    <End Role="TBL_INVOICES" Type="NEWTESTModel.Store.TBL_INVOICES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_USERS">
+        <PropertyRef Name="U_ID" />
+      </Principal>
+      <Dependent Role="TBL_INVOICES">
+        <PropertyRef Name="U_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TBL_ORDERS__I_ID__4222D4EF">
+    <End Role="TBL_INVOICES" Type="NEWTESTModel.Store.TBL_INVOICES" Multiplicity="1" />
+    <End Role="TBL_ORDERS" Type="NEWTESTModel.Store.TBL_ORDERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_INVOICES">
+        <PropertyRef Name="I_ID" />
+      </Principal>
+      <Dependent Role="TBL_ORDERS">
+        <PropertyRef Name="I_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__TBL_ORDERS__P_ID__412EB0B6">
+    <End Role="TBL_PRODUCTS" Type="NEWTESTModel.Store.TBL_PRODUCTS" Multiplicity="1" />
+    <End Role="TBL_ORDERS" Type="NEWTESTModel.Store.TBL_ORDERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBL_PRODUCTS">
+        <PropertyRef Name="P_ID" />
+      </Principal>
+      <Dependent Role="TBL_ORDERS">
+        <PropertyRef Name="P_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
